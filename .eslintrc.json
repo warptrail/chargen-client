@@ -8,6 +8,8 @@
   ],
   "plugins": ["jsx-a11y", "prettier"],
   "rules": {
+    "react/static-property-placement": [0],
+    "react/prefer-stateless-function": [0],
     "react/jsx-filename-extension": [0],
     "import/extensions": "off",
     "jsx-quotes": ["error", "prefer-double"],

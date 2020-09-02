@@ -9,7 +9,7 @@ export default class LoginForm extends Component {
 
   handleSubmitLogin = (e) => {
     e.preventDefault();
-    console.log();
+    console.log('hello?');
   };
 
   render() {
@@ -22,8 +22,8 @@ export default class LoginForm extends Component {
           <input required name="user_name" id="LoginForm__user_name" />
         </div>
         <div className="password">
-          <label htmlFor="LoginFOrm__user_password">Password</label>
-          <input required name="user_name" id="LoginForm__user_name" />
+          <label htmlFor="LoginForm__user_password">Password</label>
+          <input required name="user_name" id="LoginForm__password" />
         </div>
         <button type="submit">Login</button>
       </form>

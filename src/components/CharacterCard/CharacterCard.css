@@ -1,0 +1,15 @@
+.character_card {
+  border: solid 1px yellow;
+}
+.character_card a {
+  color: green;
+  text-decoration: none;
+}
+.character_card p {
+  text-align: center;
+  text-decoration: none;
+}
+
+.box {
+  display: flex;
+}

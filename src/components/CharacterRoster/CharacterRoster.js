@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import config from '../../config';
-import Table from '../Table/Table';
 
-export default class CharacterSheet extends Component {
+//* import components
+// import Table from '../Table/Table';
+import CharacterCard from '../CharacterCard/CharacterCard';
+
+export default class CharacterRoster extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +20,7 @@ export default class CharacterSheet extends Component {
 
   getCharacterData = () => {
     this.setState({ isFetching: true });
-    fetch(`${config.API_ENDPOINT}/charsheets`, { headers: {} })
+    fetch(`${config.API_ENDPOINT}/characters`, { headers: {} })
       .then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
@@ -50,8 +53,10 @@ export default class CharacterSheet extends Component {
 
     return (
       <div>
-        {this.state.characters.map((char) => char.char_name)}
-        <Table data={this.state.characters} />
+        {this.state.characters.map((char, index) => (
+          <CharacterCard key={index} character={char} />
+        ))}
+        {/* <Table data={this.state.characters} /> */}
       </div>
     );
   }

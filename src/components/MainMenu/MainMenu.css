@@ -1,0 +1,19 @@
+.MainMenu {
+  margin: 20px 0;
+  padding: 0;
+  text-align: center;
+}
+
+.MainMenu a {
+  text-decoration: none;
+  color: #8ff100;
+}
+
+.MainMenu__item {
+  background-color: #20262c;
+  list-style: none;
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid burlywood;
+  margin: 10px;
+}

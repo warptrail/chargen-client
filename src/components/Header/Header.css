@@ -1,0 +1,12 @@
+header {
+  background-color: #20262c;
+}
+header a {
+  text-decoration: none;
+  color: #e9631a;
+}
+
+h1,
+h2 {
+  text-align: center;
+}

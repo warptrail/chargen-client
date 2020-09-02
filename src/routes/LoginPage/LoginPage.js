@@ -13,6 +13,7 @@ export default class LoginPage extends Component {
     const { location, history } = this.props;
     console.log(location);
     console.log(history);
+    console.log('hello??');
   };
 
   render() {

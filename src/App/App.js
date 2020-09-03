@@ -36,7 +36,7 @@ export default class App extends Component {
             <Route exact path="/roster" component={RosterPage} />
             <Route
               exact
-              path="/roster/:character"
+              path="/roster/:characterId"
               component={SingleCharacterPage}
             />
             <Route exact path="/create" component={CreatePage} />

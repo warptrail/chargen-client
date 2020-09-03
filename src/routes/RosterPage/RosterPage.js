@@ -1,17 +1,34 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import CharacterRoster from '../../components/CharacterRoster/CharacterRoster';
-
+import CharacterCard from '../../components/CharacterCard/CharacterCard';
+import RosterContext from '../../contexts/RosterContext';
+import CharApiService from '../../services/character-api-service';
 import './RosterPage.css';
 
 class RosterPage extends Component {
-  state = {};
+  static contextType = RosterContext;
+
+  componentDidMount() {
+    this.context.clearError();
+    CharApiService.getRoster()
+      .then(this.context.setRoster)
+      .catch(this.context.setError);
+  }
+
+  renderCharacters() {
+    const { roster = [] } = this.context;
+    return roster.map((character) => (
+      <CharacterCard key={character.id} character={character} />
+    ));
+  }
 
   render() {
+    const { error } = this.context;
     return (
-      <div>
+      <section className="RosterPage">
         <h2>Your Character Roster Here:</h2>
-        <CharacterRoster />
-      </div>
+        {error ? <p>There was an error, try again</p> : this.renderCharacters()}
+      </section>
     );
   }
 }

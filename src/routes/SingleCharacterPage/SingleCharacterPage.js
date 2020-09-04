@@ -7,6 +7,7 @@ import CharacterContext from '../../contexts/CharacterContext';
 import CharacterApiService from '../../services/character-api-service';
 import CharacterSheet from '../../components/CharacterSheet/CharacterSheet';
 import CharacterItems from '../../components/CharacterItems/CharacterItems';
+import AddItemForm from '../../components/AddItemForm/AddItemForm';
 
 export default class SingleCharacterPage extends Component {
   state = {
@@ -30,12 +31,23 @@ export default class SingleCharacterPage extends Component {
       .catch(this.context.setError);
   }
 
+  componentWillUnmount() {
+    this.context.clearCharacter();
+  }
+
   renderCharacterSheet() {
     const { character, items } = this.context;
+    console.log(items);
     return (
       <div>
         <CharacterSheet character={character} />
-        {!items ? null : <CharacterItems items={items} />}
+        {items.length === 0 ? null : <CharacterItems items={items} />}
+        {this.state.showForm ? (
+          <AddItemForm />
+        ) : (
+          <button onClick={this.toggleForm}>Add Item</button>
+        )}
+        <button>Delete Character</button>
       </div>
     );
   }
@@ -60,19 +72,6 @@ export default class SingleCharacterPage extends Component {
           ) : (
             this.renderCharacterSheet()
           )}
-
-          {this.state.showForm ? (
-            <form>
-              <input type="text" />
-              <button type="submit">Push</button>
-              <button type="button" onClick={this.toggleForm}>
-                Cancel
-              </button>
-            </form>
-          ) : (
-            <button onClick={this.toggleForm}>Add Item</button>
-          )}
-          <button>Delete Character</button>
         </section>
       </>
     );

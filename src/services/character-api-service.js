@@ -26,28 +26,28 @@ const CharApiService = {
     );
   },
 
-  postItem(
-    characterId,
-    item_name,
-    item_type,
-    item_description,
-    item_abilities
-  ) {
+  postItem(characterId, itemName, itemType, itemDescription, itemAbilities) {
     return fetch(`${config.API_ENDPOINT}/items`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        character_Id: characterId,
-        item_name,
-        item_type,
-        item_description,
-        item_abilities
+        item_name: itemName,
+        item_type: itemType,
+        item_description: itemDescription,
+        item_abilities: itemAbilities,
+        character_id: characterId
       })
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
+  },
+
+  deleteItem(itemId) {
+    return fetch(`${config.API_ENDPOINT}/items/${itemId}`, {
+      method: 'DELETE'
+    });
   }
 };
 

@@ -56,11 +56,17 @@ export class CharacterProvider extends Component {
 
   clearCharacter = () => {
     this.setCharacter(nullCharacter);
-    this.setComments([]);
+    this.setItems(nullItems);
   };
 
   addItem = (item) => {
     this.setItems([...this.state.items, item]);
+  };
+
+  deleteItem = (item) => {
+    const items = this.state.items.filter((itm) => itm.id !== item.id);
+    this.setItems([items]);
+    console.log(item.id, 'deletingItem Check');
   };
 
   render() {
@@ -73,7 +79,8 @@ export class CharacterProvider extends Component {
       setCharacter: this.setCharacter,
       clearCharacter: this.clearCharacter,
       setItems: this.setItems,
-      addItem: this.addItem
+      addItem: this.addItem,
+      deleteItem: this.deleteItem
     };
     return (
       <CharacterContext.Provider value={value}>

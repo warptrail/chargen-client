@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
@@ -8,6 +9,10 @@ import CharacterSheet from '../../components/CharacterSheet/CharacterSheet';
 import CharacterItems from '../../components/CharacterItems/CharacterItems';
 
 export default class SingleCharacterPage extends Component {
+  state = {
+    showForm: false
+  };
+
   static defaultProps = {
     match: { params: {} }
   };
@@ -30,10 +35,16 @@ export default class SingleCharacterPage extends Component {
     return (
       <div>
         <CharacterSheet character={character} />
-        <CharacterItems items={items} />
+        {!items ? null : <CharacterItems items={items} />}
       </div>
     );
   }
+
+  toggleForm = () => {
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  };
 
   render() {
     console.log(this.context);
@@ -49,6 +60,19 @@ export default class SingleCharacterPage extends Component {
           ) : (
             this.renderCharacterSheet()
           )}
+
+          {this.state.showForm ? (
+            <form>
+              <input type="text" />
+              <button type="submit">Push</button>
+              <button type="button" onClick={this.toggleForm}>
+                Cancel
+              </button>
+            </form>
+          ) : (
+            <button onClick={this.toggleForm}>Add Item</button>
+          )}
+          <button>Delete Character</button>
         </section>
       </>
     );

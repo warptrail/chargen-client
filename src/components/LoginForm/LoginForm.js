@@ -9,7 +9,7 @@ export default class LoginForm extends Component {
 
   handleSubmitLogin = (e) => {
     e.preventDefault();
-    console.log('hello?');
+    const { userName, password } = e.target;
   };
 
   render() {

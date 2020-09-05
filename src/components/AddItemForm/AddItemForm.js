@@ -44,7 +44,7 @@ export default class AddItemForm extends Component {
         <input name="itemAbilities" type="text" />
 
         <button type="submit">Add Item</button>
-        <button type="button" onClick={this.toggleForm}>
+        <button type="button" onClick={this.props.toggleForm}>
           Cancel
         </button>
       </form>

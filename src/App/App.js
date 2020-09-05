@@ -10,6 +10,7 @@ import LoginPage from '../routes/LoginPage/LoginPage';
 import RegistrationPage from '../routes/RegistrationPage/RegistrationPage';
 import RosterPage from '../routes/RosterPage/RosterPage';
 import SingleCharacterPage from '../routes/SingleCharacterPage/SingleCharacterPage';
+import UpdateCharacterPage from '../routes/UpdateCharacterPage/UpdateCharacterPage';
 import CreatePage from '../routes/CreatePage/CreatePage';
 import NotFoundPage from '../routes/NotFoundPage/NotFoundPage';
 
@@ -39,6 +40,12 @@ export default class App extends Component {
               path="/roster/:characterId"
               component={SingleCharacterPage}
             />
+            <Route
+              exact
+              path="/roster/:characterId/update"
+              component={UpdateCharacterPage}
+            />
+
             <Route exact path="/create" component={CreatePage} />
             <Route component={NotFoundPage} />
           </Switch>

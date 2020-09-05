@@ -37,17 +37,20 @@ export default class SingleCharacterPage extends Component {
 
   renderCharacterSheet() {
     const { character, items } = this.context;
-    console.log(items);
+    console.log(this.props);
     return (
       <div>
         <CharacterSheet character={character} />
         {items.length === 0 ? null : <CharacterItems items={items} />}
         {this.state.showForm ? (
-          <AddItemForm />
+          <AddItemForm toggleForm={this.toggleForm} />
         ) : (
           <button onClick={this.toggleForm}>Add Item</button>
         )}
-        <button>Delete Character</button>
+        <button className="delete-character-button" type="button">
+          Delete Character
+        </button>
+        <Link to={`${this.props.match.url}/update`}>Edit Character</Link>
       </div>
     );
   }

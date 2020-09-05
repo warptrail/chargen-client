@@ -40,10 +40,13 @@ export default class CharacterForm extends Component {
     this.setState({ isFetching: true, isUpdateForm: true });
     CharactersService.getCharacter(characterId)
       .then(this.context.setCharacter)
-      .then(() => {
-        // console.log(this.context);
-      })
+      // .then(() => {
+      //   // console.log(this.context);
+      // })
       .then(() => this.setCharacterFormFields())
+      // .then(() => {
+      //   console.log('props', this.props);
+      // })
       .catch((error) => {
         this.setState({ isFetching: false });
         console.error(error);
@@ -90,7 +93,7 @@ export default class CharacterForm extends Component {
     const data = this.state.character;
     e.preventDefault();
     CharactersService.patchCharacter(data, characterId);
-    console.log(data);
+    this.props.returnToCharacterPage();
   };
 
   handleSubmitNewCharacter = (e) => {

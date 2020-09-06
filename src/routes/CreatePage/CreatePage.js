@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import NewCharacterForm from '../../components/NewCharacterForm/NewCharacterForm';
+import CharacterForm from '../../components/CharacterForm/CharacterForm';
 
 export default class CreatePage extends Component {
+  returnToRosterPage = () => {
+    const { history } = this.props;
+    history.push(`/roster/`);
+  };
+
   render() {
     return (
       <div>
         <h2>Create a New Character!</h2>
-        <NewCharacterForm />
+        <CharacterForm returnToRosterPage={this.returnToRosterPage} />
       </div>
     );
   }

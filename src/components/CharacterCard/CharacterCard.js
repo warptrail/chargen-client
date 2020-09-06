@@ -31,7 +31,7 @@ export default class CharacterCard extends Component {
               <th>Constitution</th>
               <th>Intelligence</th>
               <th>Wisdom</th>
-              <th>CHarisma</th>
+              <th>Charisma</th>
             </tr>
           </thead>
           <tbody>

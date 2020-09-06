@@ -30,7 +30,10 @@ export default class CharacterForm extends Component {
   componentDidMount() {
     const { characterId } = this.props;
     console.log(characterId);
-    this.getCharacterData(characterId);
+    if (characterId) {
+      this.getCharacterData(characterId);
+    }
+
     // CharactersService.getCharacter(characterId)
     //   .then(this.context.setCharacter)
     //   .catch(this.context.setError);
@@ -40,13 +43,7 @@ export default class CharacterForm extends Component {
     this.setState({ isFetching: true, isUpdateForm: true });
     CharactersService.getCharacter(characterId)
       .then(this.context.setCharacter)
-      // .then(() => {
-      //   // console.log(this.context);
-      // })
       .then(() => this.setCharacterFormFields())
-      // .then(() => {
-      //   console.log('props', this.props);
-      // })
       .catch((error) => {
         this.setState({ isFetching: false });
         console.error(error);
@@ -98,7 +95,9 @@ export default class CharacterForm extends Component {
 
   handleSubmitNewCharacter = (e) => {
     e.preventDefault();
-    console.log('newcharacter', e.target);
+    const data = this.state.character;
+    CharactersService.postCharacter(data);
+    this.props.returnToRosterPage();
   };
 
   render() {
@@ -112,6 +111,7 @@ export default class CharacterForm extends Component {
       >
         <label htmlFor="charName">Name</label>
         <input
+          required
           name="charName"
           type="text"
           value={this.state.character.charName}
@@ -120,6 +120,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="title">Title</label>
         <input
+          required
           name="title"
           type="text"
           value={this.state.character.title}
@@ -128,6 +129,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="charClass">Class</label>
         <input
+          required
           name="charClass"
           type="text"
           value={this.state.character.charClass}
@@ -136,6 +138,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="race">Race</label>
         <input
+          required
           name="race"
           type="text"
           value={this.state.character.race}
@@ -144,6 +147,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="alignment">Alignment</label>
         <input
+          required
           name="alignment"
           type="text"
           value={this.state.character.alignment}
@@ -152,6 +156,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="background">Background</label>
         <input
+          required
           name="background"
           type="text"
           value={this.state.character.background}
@@ -160,6 +165,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="charLevel">Level</label>
         <input
+          required
           name="charLevel"
           type="number"
           value={this.state.character.charLevel}
@@ -170,6 +176,7 @@ export default class CharacterForm extends Component {
 
         <label htmlFor="strength">strength</label>
         <input
+          required
           name="strength"
           type="number"
           value={this.state.character.strength}
@@ -177,6 +184,7 @@ export default class CharacterForm extends Component {
         />
         <label htmlFor="dexterity">dexterity</label>
         <input
+          required
           name="dexterity"
           type="number"
           value={this.state.character.dexterity}
@@ -184,6 +192,7 @@ export default class CharacterForm extends Component {
         />
         <label htmlFor="constitution">constitution</label>
         <input
+          required
           name="constitution"
           type="number"
           value={this.state.character.constitution}
@@ -191,6 +200,7 @@ export default class CharacterForm extends Component {
         />
         <label htmlFor="intelligence">intelligence</label>
         <input
+          required
           name="intelligence"
           type="number"
           value={this.state.character.intelligence}
@@ -198,6 +208,7 @@ export default class CharacterForm extends Component {
         />
         <label htmlFor="wisdom">wisdom</label>
         <input
+          required
           name="wisdom"
           type="number"
           value={this.state.character.wisdom}
@@ -205,6 +216,7 @@ export default class CharacterForm extends Component {
         />
         <label htmlFor="charisma">charisma</label>
         <input
+          required
           name="charisma"
           type="number"
           value={this.state.character.charisma}

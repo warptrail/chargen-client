@@ -1,5 +1,4 @@
 import config from '../config';
-import tokenService from './token-service';
 import TokenService from './token-service';
 
 const CharApiService = {
@@ -24,7 +23,7 @@ const CharApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `basic ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         char_name: data.charName,

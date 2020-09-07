@@ -1,5 +1,6 @@
 import config from '../config';
-// import tokenService
+import tokenService from './token-service';
+import TokenService from './token-service';
 
 const CharApiService = {
   getRoster() {
@@ -22,7 +23,8 @@ const CharApiService = {
     return fetch(`${config.API_ENDPOINT}/characters`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        authorization: `basic ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         char_name: data.charName,
@@ -48,7 +50,10 @@ const CharApiService = {
   patchCharacter(data, id) {
     return fetch(`${config.API_ENDPOINT}/characters/${id}`, {
       method: 'PATCH',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        authorization: `basic ${TokenService.getAuthToken()}`
+      },
       body: JSON.stringify({
         char_name: data.charName,
         title: data.title,
@@ -72,7 +77,10 @@ const CharApiService = {
 
   deleteCharacter(characterId) {
     return fetch(`${config.API_ENDPOINT}/characters/${characterId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        authorization: `basic ${TokenService.getAuthToken()}`
+      }
     });
   },
 
@@ -88,7 +96,8 @@ const CharApiService = {
     return fetch(`${config.API_ENDPOINT}/items`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        authorization: `basic ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         item_name: itemName,
@@ -104,7 +113,10 @@ const CharApiService = {
 
   deleteItem(itemId) {
     return fetch(`${config.API_ENDPOINT}/items/${itemId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        authorization: `basic ${TokenService.getAuthToken()}`
+      }
     });
   }
 };

@@ -1,0 +1,6 @@
+table {
+  display: table-row-group;
+  flex-direction: column;
+  width: 90%;
+  font-size: 12px;
+}

@@ -13,6 +13,8 @@ import SingleCharacterPage from '../routes/SingleCharacterPage/SingleCharacterPa
 import UpdateCharacterPage from '../routes/UpdateCharacterPage/UpdateCharacterPage';
 import CreatePage from '../routes/CreatePage/CreatePage';
 import NotFoundPage from '../routes/NotFoundPage/NotFoundPage';
+import PublicOnlyRoute from '../utils/PublicOnlyRoute';
+import PrivateRoute from '../utils/PrivateRoute';
 
 export default class App extends Component {
   state = { hasError: false };
@@ -32,15 +34,19 @@ export default class App extends Component {
           {this.state.hasError && <p>An Error has dealt you ten damage!</p>}
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/register" component={RegistrationPage} />
+            <PublicOnlyRoute exact path="/login" component={LoginPage} />
+            <PublicOnlyRoute
+              exact
+              path="/register"
+              component={RegistrationPage}
+            />
             <Route exact path="/roster" component={RosterPage} />
             <Route
               exact
               path="/roster/:characterId"
               component={SingleCharacterPage}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/roster/:characterId/update"
               component={UpdateCharacterPage}

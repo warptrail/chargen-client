@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AuthApiService from '../../services/auth-api-service';
 
 export default class RegistrationForm extends Component {
   static defaultProps = {
@@ -9,7 +10,21 @@ export default class RegistrationForm extends Component {
 
   handleSubmitRegistration = (e) => {
     e.preventDefault();
-    console.log(e);
+    const { user_name, password } = e.target;
+    console.log(user_name.value, password.value);
+    this.setState({ error: null });
+    AuthApiService.postUser({
+      user_name: user_name.value,
+      password: password.value
+    })
+      .then((user) => {
+        user_name.value = '';
+        password.value = '';
+        this.props.onRegistrationSuccess();
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
   };
 
   render() {
@@ -26,7 +41,7 @@ export default class RegistrationForm extends Component {
         </div>
         <div className="password">
           <label htmlFor="RegistrationForm__password">Password</label>
-          <input required name="user_name" id="RegistrationForm__password" />
+          <input required name="password" id="RegistrationForm__password" />
         </div>
         <button type="submit">Register</button>
       </form>

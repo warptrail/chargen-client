@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
+import RosterContext from '../../contexts/RosterContext';
 
 export default class LoginForm extends Component {
   static defaultProps = {
@@ -10,6 +11,8 @@ export default class LoginForm extends Component {
   };
 
   state = { error: null };
+
+  static contextType = RosterContext;
 
   handleSubmitBasicAuth = (e) => {
     e.preventDefault();
@@ -37,6 +40,7 @@ export default class LoginForm extends Component {
         password.value = '';
         TokenService.saveAuthToken(res.authToken);
         this.props.onLoginSuccess();
+        this.context.setAuthToken(true);
       })
       .catch((res) => {
         this.setState({ error: res.error });

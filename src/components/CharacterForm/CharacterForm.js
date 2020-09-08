@@ -1,17 +1,22 @@
+/* eslint-disable jsx-a11y/no-onchange */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/sort-comp */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import CharactersService from '../../services/character-api-service';
+import getRandomStats from '../../utils/randomize';
+
+import './CharacterForm.css';
 
 export default class CharacterForm extends Component {
   state = {
     character: {
       charName: '',
       title: '',
-      charClass: '',
-      race: '',
-      alignment: '',
+      charClass: 'barbarian',
+      race: 'human',
+      alignment: 'lawful good',
       background: '',
       charLevel: '',
       strength: '',
@@ -33,10 +38,6 @@ export default class CharacterForm extends Component {
     if (characterId) {
       this.getCharacterData(characterId);
     }
-
-    // CharactersService.getCharacter(characterId)
-    //   .then(this.context.setCharacter)
-    //   .catch(this.context.setError);
   }
 
   getCharacterData = (characterId) => {
@@ -89,26 +90,36 @@ export default class CharacterForm extends Component {
     const { characterId } = this.props;
     const data = this.state.character;
     e.preventDefault();
-    CharactersService.patchCharacter(data, characterId);
-    this.props.returnToCharacterPage();
+    CharactersService.patchCharacter(data, characterId).then(() => {
+      this.props.returnToCharacterPage();
+    });
   };
 
   handleSubmitNewCharacter = (e) => {
     e.preventDefault();
     const data = this.state.character;
-    CharactersService.postCharacter(data);
-    this.props.returnToRosterPage();
+    CharactersService.postCharacter(data).then((post) => {
+      this.props.returnToRosterPage();
+    });
   };
 
-  render() {
+  handleRandomizeStats = () => {
+    this.setState({
+      character: {
+        ...this.state.character,
+        strength: getRandomStats(8, 25),
+        dexterity: getRandomStats(8, 25),
+        constitution: getRandomStats(8, 25),
+        intelligence: getRandomStats(8, 25),
+        wisdom: getRandomStats(8, 25),
+        charisma: getRandomStats(8, 25)
+      }
+    });
+  };
+
+  renderInfoForm = () => {
     return (
-      <form
-        onSubmit={
-          this.state.isUpdateForm
-            ? this.handleSubmitUpdate
-            : this.handleSubmitNewCharacter
-        }
-      >
+      <fieldset>
         <label htmlFor="charName">Name</label>
         <input
           required
@@ -128,31 +139,59 @@ export default class CharacterForm extends Component {
         />
 
         <label htmlFor="charClass">Class</label>
-        <input
-          required
+        <select
           name="charClass"
-          type="text"
-          value={this.state.character.charClass}
           onChange={this.handleChange}
-        />
+          value={this.state.character.charClass}
+        >
+          <option value="barbarian">Barbarian</option>
+          <option value="bard">Bard</option>
+          <option value="cleric">Cleric</option>
+          <option value="druid">Druid</option>
+          <option value="fighter">Fighter</option>
+          <option value="monk">Monk</option>
+          <option value="paladin">Paladin</option>
+          <option value="ranger">Ranger</option>
+          <option value="rogue">Rogue</option>
+          <option value="sorcerer">Sorcerer</option>
+          <option value="warlock">Warlock</option>
+          <option value="wizard">Wizard</option>
+        </select>
 
         <label htmlFor="race">Race</label>
-        <input
-          required
+        <select
           name="race"
-          type="text"
-          value={this.state.character.race}
           onChange={this.handleChange}
-        />
+          value={this.state.character.race}
+        >
+          <option value="human">Human</option>
+          <option value="elf">Elf</option>
+          <option value="dwarf">Dwarf</option>
+          <option value="halfling">Halfling</option>
+          <option value="gnome">Gnome</option>
+          <option value="orc">Orc</option>
+          <option value="troll">Troll</option>
+          <option value="dragonborn">Dragonborn</option>
+          <option value="tiefling">Tiefling</option>
+          <option value="tabaxi">Tabaxi</option>
+        </select>
 
         <label htmlFor="alignment">Alignment</label>
-        <input
-          required
+        <select
           name="alignment"
-          type="text"
-          value={this.state.character.alignment}
           onChange={this.handleChange}
-        />
+          value={this.state.character.alignment}
+        >
+          <option value="lawful good">Lawful Good</option>
+          <option value="neutral good">Neutral Good</option>
+          <option value="chaotic good">Chaotic Good</option>
+          <option value="lawful neutral">Lawful Neutral</option>
+          <option value="neutral">Neutral</option>
+          <option value="chaotic neutral">Chaotic Neutral</option>
+          <option value="lawful evil">Lawful Evil</option>
+          <option value="neutral evil">Neutral Evil</option>
+          <option value="chaotic evil">Chaotic Evil</option>
+        </select>
 
         <label htmlFor="background">Background</label>
         <input
@@ -171,9 +210,16 @@ export default class CharacterForm extends Component {
           value={this.state.character.charLevel}
           onChange={this.handleChange}
         />
+      </fieldset>
+    );
+  };
 
-        <h4>Base Stats</h4>
-
+  renderStatsForm = () => {
+    return (
+      <fieldset className="stats_form">
+        <button type="button" onClick={this.handleRandomizeStats}>
+          Randomize
+        </button>
         <label htmlFor="strength">strength</label>
         <input
           required
@@ -222,8 +268,29 @@ export default class CharacterForm extends Component {
           value={this.state.character.charisma}
           onChange={this.handleChange}
         />
+      </fieldset>
+    );
+  };
 
-        <button type="submit">
+  render() {
+    return (
+      <form
+        onSubmit={
+          this.state.isUpdateForm
+            ? this.handleSubmitUpdate
+            : this.handleSubmitNewCharacter
+        }
+      >
+        <div className="info_box">
+          <h4>Character Info</h4>
+          {this.renderInfoForm()}
+        </div>
+        <div className="stats_box">
+          <h4>Base Stats</h4>
+          {this.renderStatsForm()}
+        </div>
+
+        <button id="submit-character-form" type="submit">
           {this.state.isUpdateForm ? 'update' : 'new character'}
         </button>
       </form>

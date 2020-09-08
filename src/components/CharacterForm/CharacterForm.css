@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  display: flex;
+}
+
+input[type='text'] {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.stats_form {
+  flex-direction: row;
+}
+.stats_form input {
+  width: 70px;
+}
+#submit-character-form {
+  margin-top: 10px;
+  font-size: 24px;
+}

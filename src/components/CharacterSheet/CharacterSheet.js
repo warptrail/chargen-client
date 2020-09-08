@@ -1,4 +1,5 @@
 import React from 'react';
+import './CharacterSheet.css';
 
 function CharacterSheet({ character }) {
   return (
@@ -23,7 +24,7 @@ function CharacterSheet({ character }) {
             <th>Constitution</th>
             <th>Intelligence</th>
             <th>Wisdom</th>
-            <th>CHarisma</th>
+            <th>Charisma</th>
           </tr>
         </thead>
         <tbody>

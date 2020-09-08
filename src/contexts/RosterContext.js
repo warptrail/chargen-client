@@ -1,4 +1,5 @@
 import React, { Component, createContext } from 'react';
+import TokenService from '../services/token-service';
 
 const RosterContext = createContext({
   roster: [],
@@ -12,7 +13,12 @@ export default RosterContext;
 export class RosterProvider extends Component {
   state = {
     roster: [],
+    hasAuthToken: TokenService.hasAuthToken(),
     error: null
+  };
+
+  setAuthToken = (token) => {
+    this.setState({ hasAuthToken: token });
   };
 
   setError = (error) => {
@@ -31,10 +37,12 @@ export class RosterProvider extends Component {
   render() {
     const value = {
       roster: this.state.roster,
+      hasAuthToken: this.state.hasAuthToken,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
-      setRoster: this.setRoster
+      setRoster: this.setRoster,
+      setAuthToken: this.setAuthToken
     };
     return (
       <RosterContext.Provider value={value}>

@@ -7,9 +7,9 @@ import toJson, { shallow } from 'enzyme-to-json';
 import UpdateCharacterPage from './UpdateCharacterPage';
 
 describe('UpdateCharacterPage component', () => {
-  const routeProps = {
-    match: {
-      params: {}
+  const match = {
+    params: {
+      characterId: '2'
     }
   };
 
@@ -17,7 +17,7 @@ describe('UpdateCharacterPage component', () => {
     const div = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        <UpdateCharacterPage props={routeProps} />
+        <UpdateCharacterPage match={match} />
       </BrowserRouter>,
       div
     );

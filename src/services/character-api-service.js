@@ -5,9 +5,10 @@ const CharApiService = {
   getRoster() {
     return fetch(`${config.API_ENDPOINT}/characters`, {
       headers: {}
-    }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
+    }).then((res) => {
+      console.log(res.status, res.statusText);
+      return !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json();
+    });
   },
 
   getCharacter(characterId) {

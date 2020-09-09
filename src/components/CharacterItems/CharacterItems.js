@@ -10,7 +10,6 @@ export default class CharacterItems extends Component {
     console.log(id, 'item ID?');
     const { items } = this.context;
     const newItems = items.filter((item) => item.id !== id);
-    console.log(items);
 
     CharApiService.deleteItem(id)
       .then(this.context.setItems(newItems))

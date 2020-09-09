@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/sort-comp */

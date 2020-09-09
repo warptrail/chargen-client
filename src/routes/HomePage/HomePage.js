@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainMenu from '../../components/MainMenu/MainMenuPage';
+import MainMenu from '../../components/MainMenu/MainMenu';
 
 export default class HomePage extends Component {
   render() {

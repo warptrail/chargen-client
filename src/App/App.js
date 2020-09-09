@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Import Components
 import Header from '../components/Header/Header';
@@ -27,9 +27,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App__header">
-          <Header />
-        </header>
+        <Header />
+
         <main className="App__main">
           {this.state.hasError && <p>An Error has dealt you ten damage!</p>}
           <Switch>
@@ -52,7 +51,7 @@ export default class App extends Component {
               component={UpdateCharacterPage}
             />
 
-            <Route exact path="/create" component={CreatePage} />
+            <PrivateRoute exact path="/create" component={CreatePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>

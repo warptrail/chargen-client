@@ -7,7 +7,7 @@ export default class MainMenu extends Component {
   render() {
     return (
       <div>
-        <p>
+        <p className="intro">
           Store your Dungeons & Dragons characters in this list. Create new
           characters, edit them, randomize their stats, and add special items to
           their inventories.

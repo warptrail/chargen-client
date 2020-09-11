@@ -9,6 +9,11 @@
   color: #8ff100;
 }
 
+.intro {
+  font-size: 20px;
+  padding: 12px;
+}
+
 .MainMenu__item {
   background-color: #20262c;
   list-style: none;

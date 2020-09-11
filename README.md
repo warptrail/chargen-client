@@ -6,6 +6,8 @@
 
 **Link to live app:** [https://chargen-client.vercel.app](https://chargen-client.vercel.app)
 
+Login Info: Login: username = warptrail. password = 1234AbC\$
+
 **Tech Stack:**
 
 - **Backend** - Node.js - Express - Postgresql

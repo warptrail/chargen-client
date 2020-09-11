@@ -12,7 +12,7 @@ export default class MainMenu extends Component {
           characters, edit them, randomize their stats, and add special items to
           their inventories.
         </p>
-        <p>Login: username = warptrail. password = 1234AbC$ </p>
+
         <ul className="MainMenu">
           <Link to="/create">
             <li className="MainMenu__item">Create New</li>

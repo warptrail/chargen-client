@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import TokenService from '../services/token-service';
 
 // Import Components
 import Header from '../components/Header/Header';
@@ -15,13 +16,28 @@ import CreatePage from '../routes/CreatePage/CreatePage';
 import NotFoundPage from '../routes/NotFoundPage/NotFoundPage';
 import PublicOnlyRoute from '../utils/PublicOnlyRoute';
 import PrivateRoute from '../utils/PrivateRoute';
+import RosterContext from '../contexts/RosterContext';
 
 export default class App extends Component {
   state = { hasError: false };
 
+  static contextType = RosterContext;
+
   static getDerivedStateFromError(error) {
     console.error(error);
     return { hasError: true };
+  }
+
+  componentDidMount() {
+    if (!TokenService.hasAuthToken()) {
+      return;
+    }
+    const token = TokenService.readJwtToken();
+    console.log(token);
+    if (new Date(token.exp * 1000) < new Date()) {
+      TokenService.clearAuthToken();
+      this.context.setAuthToken(null);
+    }
   }
 
   render() {

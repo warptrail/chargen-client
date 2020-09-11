@@ -52,7 +52,7 @@ const CharApiService = {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
-        authorization: `basic ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         char_name: data.charName,
@@ -77,7 +77,7 @@ const CharApiService = {
     return fetch(`${config.API_ENDPOINT}/characters/${characterId}`, {
       method: 'DELETE',
       headers: {
-        authorization: `basic ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`
       }
     });
   },
@@ -95,7 +95,7 @@ const CharApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `basic ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
         item_name: itemName,
@@ -113,7 +113,7 @@ const CharApiService = {
     return fetch(`${config.API_ENDPOINT}/items/${itemId}`, {
       method: 'DELETE',
       headers: {
-        authorization: `basic ${TokenService.getAuthToken()}`
+        authorization: `bearer ${TokenService.getAuthToken()}`
       }
     });
   }

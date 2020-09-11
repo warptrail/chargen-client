@@ -11,40 +11,39 @@ export default class CharacterCard extends Component {
       <section className="character_card">
         <Link to={`/roster/${character.id}`}>
           <div>
-            <h2>{character.char_name}</h2>
+            <h2 className="character_name">{character.char_name}</h2>
           </div>
         </Link>
 
-        <p>{character.title}</p>
-        <p>Class: {character.char_class}</p>
-        <p>Race: {character.race}</p>
-        <p>Background: {character.background}</p>
-        <p>Alignment: {character.alignment}</p>
-        <p>User: {character.user.user_name}</p>
-        <p>Number of Items: {character.number_of_items}</p>
-        <h3>Stats</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Strength</th>
-              <th>Dexterity</th>
-              <th>Constitution</th>
-              <th>Intelligence</th>
-              <th>Wisdom</th>
-              <th>Charisma</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{character.strength}</td>
-              <td>{character.dexterity}</td>
-              <td>{character.constitution}</td>
-              <td>{character.intelligence}</td>
-              <td>{character.wisdom}</td>
-              <td>{character.charisma}</td>
-            </tr>
-          </tbody>
-        </table>
+        <p className="character_card_title">{character.title}</p>
+        <p>
+          <span className="character_card_key">Class:</span>{' '}
+          {character.char_class}
+        </p>
+        <p>
+          {' '}
+          <span className="character_card_key">Race:</span> {character.race}
+        </p>
+        <p>
+          {' '}
+          <span className="character_card_key">Background:</span>{' '}
+          {character.background}
+        </p>
+        <p>
+          {' '}
+          <span className="character_card_key">Alignment:</span>{' '}
+          {character.alignment}
+        </p>
+        <p>
+          {' '}
+          <span className="character_card_key">User:</span>{' '}
+          {character.user.user_name}
+        </p>
+        <p>
+          {' '}
+          <span className="character_card_key">Number of Items:</span>{' '}
+          {character.number_of_items}
+        </p>
       </section>
     );
   }

@@ -1,0 +1,38 @@
+.character_controls {
+  display: flex;
+  justify-content: center;
+}
+.edit_character_link_btn,
+.delete_character_button,
+.back_to_roster_link {
+  background-color: #b69f25;
+  padding: 10px;
+  text-decoration: none;
+  margin: 20px auto;
+  color: #0f1205;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete_character_button {
+  background-color: #5e0909;
+  color: #ffcfb5;
+}
+
+.addItemForm_toggle_button {
+  text-align: center;
+}
+
+.addItemForm_toggle_button button {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 120px;
+  font-size: 18px;
+  background-color: #1f720f;
+}
+.back_to_roster_link {
+  text-decoration: none;
+  background-color: #1f720f;
+  padding: 3px;
+}

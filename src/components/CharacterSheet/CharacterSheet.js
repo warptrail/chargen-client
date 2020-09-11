@@ -1,14 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './CharacterSheet.css';
 
 function CharacterSheet({ character }) {
   return (
     <section className="character_card">
-      <div>
-        <h2>{character.char_name}</h2>
-      </div>
+      <h2>{character.char_name}</h2>
 
-      <p>{character.title}</p>
+      <p className="character_title">{character.title}</p>
       <p>Class: {character.char_class}</p>
       <p>Race: {character.race}</p>
       <p>Background: {character.background}</p>
@@ -16,7 +15,34 @@ function CharacterSheet({ character }) {
       <p>User: {character.user.user_name}</p>
       <p>Number of Items: {character.number_of_items}</p>
       <h3>Stats</h3>
-      <table>
+      <section className="stats">
+        <div className="stat_box">
+          <div className="stat_box_title">Strength</div>
+          <p className>{character.strength}</p>
+        </div>
+        <div className="stat_box">
+          <div className="stat_box_title">Dexterity</div>
+          <p>{character.dexterity}</p>
+        </div>
+        <div className="stat_box">
+          <div className="stat_box_title">Constitution</div>
+          <p>{character.constitution}</p>
+        </div>
+        <div className="stat_box">
+          <div className="stat_box_title">Intelligence</div>
+          <p>{character.intelligence}</p>
+        </div>
+        <div className="stat_box">
+          <div className="stat_box_title">Wisdom</div>
+          <p>{character.wisdom}</p>
+        </div>
+        <div className="stat_box">
+          <div className="stat_box_title">Charisma</div>
+          <p>{character.charisma}</p>
+        </div>
+      </section>
+
+      {/* <table>
         <thead>
           <tr>
             <th>Strength</th>
@@ -37,7 +63,7 @@ function CharacterSheet({ character }) {
             <td>{character.charisma}</td>
           </tr>
         </tbody>
-      </table>
+      </table> */}
     </section>
   );
 }

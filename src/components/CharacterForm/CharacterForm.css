@@ -1,8 +1,10 @@
-form {
+.character_form {
   display: flex;
   flex-direction: column;
 }
-
+.character_form label {
+  margin-bottom: 8px;
+}
 fieldset {
   display: flex;
 }
@@ -18,7 +20,27 @@ input[type='text'] {
 .stats_form input {
   width: 70px;
 }
+
+.randomize_button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #4e0b65;
+  color: #8eef01;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
 #submit-character-form {
   margin-top: 10px;
   font-size: 24px;
+}
+
+.submit_character_form_btn {
+  margin: 0 auto;
+}
+.submit_character_form_btn button {
+  background-color: #1f720f;
+  padding: 10px;
+  margin-bottom: 30px;
+  cursor: pointer;
 }

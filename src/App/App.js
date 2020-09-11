@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import TokenService from '../services/token-service';
 
 // Import Components
@@ -17,6 +17,8 @@ import NotFoundPage from '../routes/NotFoundPage/NotFoundPage';
 import PublicOnlyRoute from '../utils/PublicOnlyRoute';
 import PrivateRoute from '../utils/PrivateRoute';
 import RosterContext from '../contexts/RosterContext';
+
+import './App.css';
 
 export default class App extends Component {
   state = { hasError: false };

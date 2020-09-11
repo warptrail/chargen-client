@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/sort-comp */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -9,6 +10,8 @@ import CharacterSheet from '../../components/CharacterSheet/CharacterSheet';
 import CharacterItems from '../../components/CharacterItems/CharacterItems';
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import RosterContext from '../../contexts/RosterContext';
+
+import './SingleCharacterPage.css';
 
 export default class SingleCharacterPage extends Component {
   state = {
@@ -43,60 +46,66 @@ export default class SingleCharacterPage extends Component {
     return (
       <div>
         <CharacterSheet character={character} />
+        <div className="character_controls">
+          <Link
+            className="edit_character_link_btn"
+            to={`${this.props.match.url}/update`}
+          >
+            Edit Character
+          </Link>
+
+          {/* Render Roster Context to Delete Character */}
+          <RosterContext.Consumer>
+            {(roster) => {
+              const populateRoster = () => {
+                CharacterApiService.getRoster();
+              };
+
+              const returnToRosterPage = () => {
+                const { history } = this.props;
+                history.push('/roster/');
+              };
+
+              const handleDeleteCharacter = (e) => {
+                const { characterId } = this.props.match.params;
+                populateRoster();
+
+                const oldRoster = this.state.roster;
+                const newRoster = oldRoster.filter(
+                  (chr) => chr.id !== Number(characterId)
+                );
+
+                CharacterApiService.deleteCharacter(characterId)
+                  .then(roster.setRoster(newRoster))
+                  .then(returnToRosterPage)
+                  .catch(roster.setError);
+                // CharApiService.deleteItem(id)
+                //   .then(this.context.setItems(newItems))
+                //   .catch(this.context.setError);
+              };
+              return (
+                <button
+                  className="delete_character_button"
+                  type="button"
+                  onClick={handleDeleteCharacter}
+                >
+                  Delete Character
+                </button>
+              );
+            }}
+          </RosterContext.Consumer>
+        </div>
+
         {items.length === 0 ? null : <CharacterItems items={items} />}
         {this.state.showForm ? (
           <AddItemForm toggleForm={this.toggleForm} />
         ) : (
-          <button onClick={this.toggleForm}>Add Item</button>
+          <div className="addItemForm_toggle_button">
+            <button type="button" onClick={this.toggleForm}>
+              Add Item
+            </button>
+          </div>
         )}
-        <Link to={`${this.props.match.url}/update`}>Edit Character</Link>
-
-        {/* Render Roster Context to Delete Character */}
-        <RosterContext.Consumer>
-          {(roster) => {
-            const populateRoster = () => {
-              CharacterApiService.getRoster().then((r) => {
-                console.log(r);
-                // roster.setRoster(r);
-              });
-            };
-
-            const returnToRosterPage = () => {
-              const { history } = this.props;
-              history.push(`/roster/`);
-            };
-
-            const handleDeleteCharacter = (e) => {
-              console.log(e, 'character ID?');
-              console.log(this.props.match.params.characterId);
-              const { characterId } = this.props.match.params;
-              populateRoster();
-
-              const oldRoster = this.state.roster;
-              const newRoster = oldRoster.filter(
-                (chr) => chr.id !== Number(characterId)
-              );
-              console.log(oldRoster, newRoster);
-
-              CharacterApiService.deleteCharacter(characterId)
-                .then(roster.setRoster(newRoster))
-                .then(returnToRosterPage)
-                .catch(roster.setError);
-              // CharApiService.deleteItem(id)
-              //   .then(this.context.setItems(newItems))
-              //   .catch(this.context.setError);
-            };
-            return (
-              <button
-                className="delete-character-button"
-                type="button"
-                onClick={handleDeleteCharacter}
-              >
-                Delete Character
-              </button>
-            );
-          }}
-        </RosterContext.Consumer>
       </div>
     );
   }
@@ -111,8 +120,8 @@ export default class SingleCharacterPage extends Component {
     const { error } = this.context;
     return (
       <>
-        <Link to="/roster">
-          <p>Back to Roster</p>
+        <Link className="back_to_roster_link" to="/roster">
+          ⬅︎ Back to Roster
         </Link>
         <section className="CharacterSheet">
           {error ? (

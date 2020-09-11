@@ -1,0 +1,37 @@
+.item_list_title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.SingleCharacterPage__item_list {
+  margin: 10px;
+  padding: 20px;
+}
+.item_list {
+  border: 1px solid #145aca;
+  border-radius: 15px;
+  list-style: none;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.item_list h3 {
+  margin-left: 20px;
+  font-size: 24px;
+  color: #6bc0f1;
+}
+.item_delete_button {
+  text-align: right;
+  margin: 10px;
+}
+
+.item_delete_button button {
+  background-color: #5e0909;
+  color: #ffcfb5;
+}
+
+.item_attribute_title {
+  color: #6b9ef1;
+  font-weight: bolder;
+  font-size: 18px;
+}

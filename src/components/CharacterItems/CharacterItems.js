@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import CharApiService from '../../services/character-api-service';
 import CharacterContext from '../../contexts/CharacterContext';
+
+import './CharacterItems.css';
 
 export default class CharacterItems extends Component {
   static contextType = CharacterContext;
@@ -18,25 +22,45 @@ export default class CharacterItems extends Component {
 
   render() {
     return (
-      <ul className="SingleCharacterPage__item_list">
-        {this.context.items.length === 0
-          ? null
-          : this.props.items.map((item, index) => (
-              <li key={index} className="SingleCharacterPage__item">
-                <h3>{item.item_name}</h3>
-                <p>Type: {item.item_type}</p>
-                <p>Description: {item.item_description}</p>
-                <p>Abilities: {item.item_abilities}</p>
-                <p>Created By: {item.user.user_name}</p>
-                <button
-                  type="button"
-                  onClick={() => this.handleDeleteItem(item.id)}
-                >
-                  Delete Item
-                </button>
-              </li>
-            ))}
-      </ul>
+      <>
+        <h4 className="item_list_title">Items List:</h4>
+        <ul className="SingleCharacterPage__item_list">
+          {this.context.items.length === 0
+            ? null
+            : this.props.items.map((item, index) => (
+                <li key={index} className="item_list">
+                  <h3>{item.item_name}</h3>
+                  <p>
+                    <span className="item_attribute_title">Type:</span>{' '}
+                    {item.item_type}
+                  </p>
+                  <p>
+                    {' '}
+                    <span className="item_attribute_title">
+                      Description:
+                    </span>{' '}
+                    {item.item_description}
+                  </p>
+                  <p>
+                    {' '}
+                    <span className="item_attribute_title">
+                      Abilities:
+                    </span>{' '}
+                    {item.item_abilities}
+                  </p>
+
+                  <div className="item_delete_button">
+                    <button
+                      type="button"
+                      onClick={() => this.handleDeleteItem(item.id)}
+                    >
+                      Delete Item
+                    </button>
+                  </div>
+                </li>
+              ))}
+        </ul>
+      </>
     );
   }
 }

@@ -1,8 +1,14 @@
 .character_card {
   border: solid 1px yellow;
+  margin: 10px;
+}
+
+.character_name {
+  font-size: 29px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .character_card a {
-  color: green;
+  color: #c8c308;
   text-decoration: none;
 }
 .character_card p {
@@ -10,6 +16,17 @@
   text-decoration: none;
 }
 
+.character_card_title {
+  font-family: cursive;
+  font-size: 20px;
+  color: #ef5101;
+}
+
+.character_card_key {
+  font-weight: bolder;
+  color: #ab6214;
+  font-size: 18px;
+}
 .box {
   display: flex;
 }

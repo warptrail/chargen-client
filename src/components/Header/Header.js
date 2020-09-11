@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import RosterContext from '../../contexts/RosterContext';
 import './Header.css';

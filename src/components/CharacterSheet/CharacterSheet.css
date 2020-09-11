@@ -1,6 +1,25 @@
-table {
-  display: table-row-group;
-  flex-direction: column;
-  width: 90%;
-  font-size: 12px;
+.character_title {
+  font-family: cursive;
+  font-family: 20px;
+}
+.character_card h3 {
+  text-align: center;
+  color: #af6316;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.stat_box {
+  border: 1px solid yellow;
+
+  margin: 10px;
+}
+
+.stat_box_title {
+  background-color: #677a8c;
+  padding: 4px;
 }

@@ -219,7 +219,11 @@ export default class CharacterForm extends Component {
   renderStatsForm = () => {
     return (
       <fieldset className="stats_form">
-        <button type="button" onClick={this.handleRandomizeStats}>
+        <button
+          className="randomize_button"
+          type="button"
+          onClick={this.handleRandomizeStats}
+        >
           Randomize
         </button>
         <label htmlFor="strength">strength</label>
@@ -277,6 +281,7 @@ export default class CharacterForm extends Component {
   render() {
     return (
       <form
+        className="character_form"
         onSubmit={
           this.state.isUpdateForm
             ? this.handleSubmitUpdate
@@ -291,10 +296,11 @@ export default class CharacterForm extends Component {
           <h4>Base Stats</h4>
           {this.renderStatsForm()}
         </div>
-
-        <button id="submit-character-form" type="submit">
-          {this.state.isUpdateForm ? 'update' : 'new character'}
-        </button>
+        <div className="submit_character_form_btn">
+          <button id="submit-character-form" type="submit">
+            {this.state.isUpdateForm ? 'update' : 'new character'}
+          </button>
+        </div>
       </form>
     );
   }

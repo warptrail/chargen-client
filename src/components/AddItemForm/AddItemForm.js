@@ -1,6 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import CharacterContext from '../../contexts/CharacterContext';
 import CharApiService from '../../services/character-api-service';
+
+import './AddItem.css';
 
 export default class AddItemForm extends Component {
   static contextType = CharacterContext;
@@ -30,21 +35,34 @@ export default class AddItemForm extends Component {
   render() {
     return (
       <form className="AddItemForm" onSubmit={this.handleSubmit}>
-        <label />
-        <label htmlFor="itemName">Item Name</label>
-        <input name="itemName" type="text" />
+        <div className="AddItemForm_input_box">
+          <label htmlFor="itemName">Item Name</label>
+          <input name="itemName" type="text" />
+        </div>
 
-        <label htmlFor="itemType">Item Type</label>
-        <input name="itemType" type="text" />
+        <div className="AddItemForm_input_box">
+          <label htmlFor="itemType">Item Type</label>
+          <input name="itemType" type="text" />
+        </div>
 
-        <label htmlFor="itemDescription">Item Description</label>
-        <input name="itemDescription" type="text" />
+        <div className="AddItemForm_input_box">
+          <label htmlFor="itemDescription">Item Description</label>
+          <input name="itemDescription" type="text" />
+        </div>
 
-        <label htmlFor="itemAbilities">Item Abilities</label>
-        <input name="itemAbilities" type="text" />
+        <div className="AddItemForm_input_box">
+          <label htmlFor="itemAbilities">Item Abilities</label>
+          <input name="itemAbilities" type="text" />
+        </div>
 
-        <button type="submit">Add Item</button>
-        <button type="button" onClick={this.props.toggleForm}>
+        <button className="AddItemForm_submit_button" type="submit">
+          Add Item
+        </button>
+        <button
+          className="toggleForm_button"
+          type="button"
+          onClick={this.props.toggleForm}
+        >
           Cancel
         </button>
       </form>

@@ -1,9 +1,11 @@
 import React, { Component, createContext } from 'react';
+import PropTypes from 'prop-types';
 import TokenService from '../services/token-service';
 
 const RosterContext = createContext({
   roster: [],
   error: null,
+  hasAuthToken: false,
   setError: () => {},
   clearError: () => {},
   setRoster: () => {}
@@ -11,6 +13,10 @@ const RosterContext = createContext({
 export default RosterContext;
 
 export class RosterProvider extends Component {
+  static defaultProps = {
+    children: {}
+  };
+
   state = {
     roster: [],
     hasAuthToken: TokenService.hasAuthToken(),
@@ -35,19 +41,23 @@ export class RosterProvider extends Component {
   };
 
   render() {
+    const { roster, hasAuthToken, error } = this.state;
+    const { children } = this.props;
     const value = {
-      roster: this.state.roster,
-      hasAuthToken: this.state.hasAuthToken,
-      error: this.state.error,
+      roster,
+      hasAuthToken,
+      error,
       setError: this.setError,
       clearError: this.clearError,
       setRoster: this.setRoster,
       setAuthToken: this.setAuthToken
     };
     return (
-      <RosterContext.Provider value={value}>
-        {this.props.children}
-      </RosterContext.Provider>
+      <RosterContext.Provider value={value}>{children}</RosterContext.Provider>
     );
   }
 }
+
+RosterProvider.propTypes = {
+  children: PropTypes.object
+};

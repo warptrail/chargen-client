@@ -1,58 +1,63 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import CharacterContext from '../../contexts/CharacterContext';
 import CharApiService from '../../services/character-api-service';
 
 import './AddItem.css';
 
 export default class AddItemForm extends Component {
+  static defaultProps = {
+    toggleForm: () => {}
+  };
+
   static contextType = CharacterContext;
 
-  handleSubmit = (e) => {
+  handleSubmitItem = (e) => {
     e.preventDefault();
-    const { character } = this.context;
+    const { character, addItem, setError } = this.context;
     const { itemName, itemType, itemDescription, itemAbilities } = e.target;
 
+    // Make the Fetch to Post a new item
     CharApiService.postItem(
       character.id,
       itemName.value,
-      itemType.value,
-      itemDescription.value,
-      itemAbilities.value
+      itemType.value || 'Generic',
+      itemDescription.value || 'A typical item',
+      itemAbilities.value || 'None'
     )
-      .then(this.context.addItem)
+      .then(addItem)
       .then(() => {
         itemName.value = '';
         itemType.value = '';
         itemDescription.value = '';
         itemAbilities.value = '';
       })
-      .catch(this.context.setError);
+      .catch(setError);
   };
 
   render() {
+    const { toggleForm } = this.props;
     return (
-      <form className="AddItemForm" onSubmit={this.handleSubmit}>
+      <form className="AddItemForm" onSubmit={this.handleSubmitItem}>
         <div className="AddItemForm_input_box">
           <label htmlFor="itemName">Item Name</label>
-          <input name="itemName" type="text" />
+          <input required id="itemName" name="itemName" type="text" />
         </div>
 
         <div className="AddItemForm_input_box">
           <label htmlFor="itemType">Item Type</label>
-          <input name="itemType" type="text" />
+          <input id="itemType" name="itemType" type="text" />
         </div>
 
         <div className="AddItemForm_input_box">
           <label htmlFor="itemDescription">Item Description</label>
-          <input name="itemDescription" type="text" />
+          <input id="itemDescription" name="itemDescription" type="text" />
         </div>
 
         <div className="AddItemForm_input_box">
           <label htmlFor="itemAbilities">Item Abilities</label>
-          <input name="itemAbilities" type="text" />
+          <input id="itemAbilities" name="itemAbilities" type="text" />
         </div>
 
         <button className="AddItemForm_submit_button" type="submit">
@@ -61,7 +66,7 @@ export default class AddItemForm extends Component {
         <button
           className="toggleForm_button"
           type="button"
-          onClick={this.props.toggleForm}
+          onClick={toggleForm}
         >
           Cancel
         </button>
@@ -69,3 +74,7 @@ export default class AddItemForm extends Component {
     );
   }
 }
+
+AddItemForm.propTypes = {
+  toggleForm: PropTypes.func
+};

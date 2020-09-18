@@ -8,10 +8,8 @@
   text-decoration: none;
   color: #8ff100;
 }
-
-.intro {
-  font-size: 20px;
-  padding: 12px;
+.MainMenu a:hover {
+  color: #e9631a;
 }
 
 .MainMenu__item {

@@ -1,33 +1,42 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CharApiService from '../../services/character-api-service';
 import CharacterContext from '../../contexts/CharacterContext';
 
 import './CharacterItems.css';
 
 export default class CharacterItems extends Component {
+  static defaultProps = {
+    items: [
+      {
+        id: 0,
+        item_name: '',
+        item_type: '',
+        item_description: '',
+        item_abilities: ''
+      }
+    ]
+  };
+
   static contextType = CharacterContext;
 
+  // Makes the delete fetch request to delete an item
   handleDeleteItem = (id) => {
-    console.log(id, 'item ID?');
-    const { items } = this.context;
+    const { items, setItems, setError } = this.context;
     const newItems = items.filter((item) => item.id !== id);
 
-    CharApiService.deleteItem(id)
-      .then(this.context.setItems(newItems))
-      .catch(this.context.setError);
+    CharApiService.deleteItem(id).then(setItems(newItems)).catch(setError);
   };
 
   render() {
+    const { items } = this.props;
     return (
       <>
         <h4 className="item_list_title">Items List:</h4>
         <ul className="SingleCharacterPage__item_list">
-          {this.context.items.length === 0
+          {items.length === 0
             ? null
-            : this.props.items.map((item, index) => (
+            : items.map((item, index) => (
                 <li key={index} className="item_list">
                   <h3>{item.item_name}</h3>
                   <p>
@@ -64,3 +73,15 @@ export default class CharacterItems extends Component {
     );
   }
 }
+
+CharacterItems.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      item_name: PropTypes.string,
+      item_type: PropTypes.string,
+      item_description: PropTypes.string,
+      item_abilities: PropTypes.string
+    })
+  )
+};

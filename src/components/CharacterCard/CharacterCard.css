@@ -1,30 +1,38 @@
 .character_card {
-  border: solid 1px yellow;
+  border: solid 1px #edff00;
+  border-radius: 8px;
   margin: 10px;
+  text-decoration: none;
 }
 
 .character_name {
   font-size: 29px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.character_card_title {
+  font-size: 24px;
+  color: #ef5101;
+}
+
 .character_card a {
-  color: #c8c308;
+  color: #8ff100;
   text-decoration: none;
 }
+
+.character_card:hover {
+  background-color: #243341;
+  border: solid 1px #2bff00;
+}
+
 .character_card p {
   text-align: center;
   text-decoration: none;
 }
 
-.character_card_title {
-  font-family: cursive;
-  font-size: 20px;
-  color: #ef5101;
-}
-
 .character_card_key {
   font-weight: bolder;
-  color: #ab6214;
+  color: #edff00;
   font-size: 18px;
 }
 .box {

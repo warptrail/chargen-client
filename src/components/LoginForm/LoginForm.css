@@ -1,0 +1,27 @@
+.login_form {
+  font-size: 20px;
+  margin-left: 18px;
+}
+
+.login_form label {
+  margin-right: 30px;
+}
+
+.login_form div {
+  margin-top: 15px;
+}
+
+.login-form button {
+  margin-top: 10px;
+}
+
+.login_form_submit_btn {
+  margin-top: 20px;
+  margin-left: 90px;
+}
+
+.login_form_submit_btn button {
+  font-size: 20px;
+  padding: 0 40px;
+  margin-top: 20px;
+}

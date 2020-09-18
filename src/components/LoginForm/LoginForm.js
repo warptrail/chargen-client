@@ -5,27 +5,18 @@ import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 import RosterContext from '../../contexts/RosterContext';
 
+import './LoginForm.css';
+
 export default class LoginForm extends Component {
   static defaultProps = {
     onLoginSuccess: () => {}
   };
 
-  state = { error: null };
-
   static contextType = RosterContext;
 
-  handleSubmitBasicAuth = (e) => {
-    e.preventDefault();
-    const { user_name, password } = e.target;
-    TokenService.saveAuthToken(
-      TokenService.makeBasicAuthToken(user_name.value, password.value)
-    );
+  state = { error: null };
 
-    user_name.value = '';
-    password.value = '';
-    this.props.onLoginSuccess();
-  };
-
+  // Logic to log in and make post fetch request to auth endpoint
   handleSubmitJwtAuth = (e) => {
     e.preventDefault();
     this.setState({ error: null });
@@ -50,17 +41,33 @@ export default class LoginForm extends Component {
   render() {
     const { error } = this.state;
     return (
-      <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
+      <form className="login_form" onSubmit={this.handleSubmitJwtAuth}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
-        <div className="user_name">
-          <label htmlFor="LoginForm__user_name">User name</label>
-          <input required name="user_name" id="LoginForm__user_name" />
+        <div className="login_form_user_name">
+          <label htmlFor="login_form__user_name">User name</label>
+          <input required name="user_name" id="login_form__user_name" />
         </div>
-        <div className="password">
-          <label htmlFor="LoginForm__user_password">Password</label>
-          <input required name="password" id="LoginForm__password" />
+        <div className="login_form_password">
+          <label htmlFor="login_form__user_password">Password</label>
+          <input
+            required
+            type="password"
+            name="password"
+            id="login_form__password"
+          />
         </div>
-        <button type="submit">Login</button>
+        <div className="login_form_submit_btn">
+          <button type="submit">Login</button>
+        </div>
+        <p>For Demo mode enter the following:</p>
+        <ul>
+          <li>
+            User name: <span className="demo_info">demo</span>
+          </li>
+          <li>
+            password: <span className="demo_info">Chargen2%</span>
+          </li>
+        </ul>
       </form>
     );
   }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import RosterContext from '../../contexts/RosterContext';
 import CharApiService from '../../services/character-api-service';
+import SecondaryHeader from '../../components/SecondaryHeader/SecondaryHeader';
 import './RosterPage.css';
 
 class RosterPage extends Component {
@@ -23,18 +24,33 @@ class RosterPage extends Component {
   }
 
   render() {
-    const { error } = this.context;
+    const { error, roster } = this.context;
     return (
-      <section className="RosterPage">
-        <h2>Your Character Roster Here:</h2>
-        {error ? <p>There was an error, try again</p> : this.renderCharacters()}
-      </section>
+      <>
+        <SecondaryHeader page="roster" />
+        <section className="RosterPage">
+          <h2>Your Character Roster Here:</h2>
+          {roster.length > 0 ? (
+            <p className="subtext">
+              {' '}
+              Click on a character card for more info and to access edit/delete
+              controls
+            </p>
+          ) : (
+            <p className="subtext">
+              No Characters in your realm yet. Summon one by clicking &quot;New
+              Character&quot; above!
+            </p>
+          )}
+          {error ? (
+            <p>There was an error, try again</p>
+          ) : (
+            this.renderCharacters()
+          )}
+        </section>
+      </>
     );
   }
 }
 
 export default RosterPage;
-
-// Needs to pull all characters
-// Display them as cards in a grid
-// Name Picture Class Level

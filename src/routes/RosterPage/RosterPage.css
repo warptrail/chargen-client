@@ -6,3 +6,8 @@
 .cell {
   height: 100px;
 }
+
+.subtext {
+  text-align: center;
+  font-size: 14px;
+}

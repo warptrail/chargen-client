@@ -1,11 +1,19 @@
-.character_title {
-  font-family: cursive;
-  font-family: 20px;
-}
-.character_card h3 {
+.character_sheet {
   text-align: center;
-  color: #af6316;
+  border: 1px solid #8ff100;
+  border-radius: 10px;
+  margin-top: 10px;
 }
+
+.character_sheet_name {
+  font-size: 29px;
+}
+.character_sheet_title {
+  color: #f16a00;
+  font-style: italic;
+  font-size: 25px;
+}
+
 .stats {
   display: flex;
   flex-wrap: wrap;
@@ -15,8 +23,15 @@
 
 .stat_box {
   border: 1px solid yellow;
+  border-radius: 8px;
 
   margin: 10px;
+}
+
+.character_sheet_key {
+  font-weight: bolder;
+  color: #edff00;
+  font-size: 18px;
 }
 
 .stat_box_title {

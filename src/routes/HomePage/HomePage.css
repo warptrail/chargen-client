@@ -1,0 +1,23 @@
+.intro_header {
+  text-align: center;
+  font-size: 28px;
+}
+
+.intro {
+  font-size: 20px;
+  padding: 20px;
+  margin: 0;
+}
+.introduction_section h4 {
+  font-size: 22px;
+}
+
+.getting_started,
+.the_run_down {
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+.intro_list {
+  margin: 10px 0;
+}

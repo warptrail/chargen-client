@@ -1,60 +1,74 @@
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/sort-comp */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import CharacterContext from '../../contexts/CharacterContext';
 import CharacterApiService from '../../services/character-api-service';
 import CharacterSheet from '../../components/CharacterSheet/CharacterSheet';
 import CharacterItems from '../../components/CharacterItems/CharacterItems';
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
+import SecondaryHeader from '../../components/SecondaryHeader/SecondaryHeader';
+
 import RosterContext from '../../contexts/RosterContext';
 
 import './SingleCharacterPage.css';
 
 export default class SingleCharacterPage extends Component {
+  static contextType = CharacterContext;
+
   state = {
-    roster: {},
+    oldRoster: {},
     showForm: false
   };
 
   static defaultProps = {
-    match: { params: {} }
+    match: { params: {} },
+    history: {}
   };
 
-  static contextType = CharacterContext;
+  // !Note this component references two contexts
 
   componentDidMount() {
-    const { characterId } = this.props.match.params;
-    this.context.clearError();
+    const { clearError, setError, setCharacter, setItems } = this.context;
+    const { match } = this.props;
+    const { characterId } = match.params;
+    clearError();
     CharacterApiService.getCharacter(characterId)
-      .then(this.context.setCharacter)
-      .catch(this.context.setError);
+      .then(setCharacter)
+      .catch(setError);
     CharacterApiService.getCharacterItems(characterId)
-      .then(this.context.setItems)
-      .catch(this.context.setError);
-    CharacterApiService.getRoster().then((roster) => this.setState({ roster }));
+      .then(setItems)
+      .catch(setError);
+    CharacterApiService.getRoster().then((oldRoster) =>
+      this.setState({ oldRoster })
+    );
   }
 
   componentWillUnmount() {
-    this.context.clearCharacter();
+    const { clearCharacter } = this.context;
+    clearCharacter();
   }
+
+  toggleForm = () => {
+    const { showForm } = this.state;
+    this.setState({
+      showForm: !showForm
+    });
+  };
 
   renderCharacterSheet() {
     const { character, items } = this.context;
+    const { match } = this.props;
+    const { showForm } = this.state;
     return (
-      <div>
+      <>
         <CharacterSheet character={character} />
         <div className="character_controls">
-          <Link
-            className="edit_character_link_btn"
-            to={`${this.props.match.url}/update`}
-          >
+          <Link className="edit_character_link_btn" to={`${match.url}/update`}>
             Edit Character
           </Link>
 
-          {/* Render Roster Context to Delete Character */}
+          {/* Render Roster Context in order to Delete Character */}
           <RosterContext.Consumer>
             {(roster) => {
               const populateRoster = () => {
@@ -66,11 +80,11 @@ export default class SingleCharacterPage extends Component {
                 history.push('/roster/');
               };
 
-              const handleDeleteCharacter = (e) => {
-                const { characterId } = this.props.match.params;
+              const handleDeleteCharacter = () => {
+                const { characterId } = match.params;
+                const { oldRoster } = this.state;
                 populateRoster();
 
-                const oldRoster = this.state.roster;
                 const newRoster = oldRoster.filter(
                   (chr) => chr.id !== Number(characterId)
                 );
@@ -79,9 +93,6 @@ export default class SingleCharacterPage extends Component {
                   .then(roster.setRoster(newRoster))
                   .then(returnToRosterPage)
                   .catch(roster.setError);
-                // CharApiService.deleteItem(id)
-                //   .then(this.context.setItems(newItems))
-                //   .catch(this.context.setError);
               };
               return (
                 <button
@@ -96,8 +107,9 @@ export default class SingleCharacterPage extends Component {
           </RosterContext.Consumer>
         </div>
 
+        {/* Render the Character Inventory with add item form to toggle */}
         {items.length === 0 ? null : <CharacterItems items={items} />}
-        {this.state.showForm ? (
+        {showForm ? (
           <AddItemForm toggleForm={this.toggleForm} />
         ) : (
           <div className="addItemForm_toggle_button">
@@ -106,31 +118,27 @@ export default class SingleCharacterPage extends Component {
             </button>
           </div>
         )}
-      </div>
+      </>
     );
   }
-
-  toggleForm = () => {
-    this.setState({
-      showForm: !this.state.showForm
-    });
-  };
 
   render() {
     const { error } = this.context;
     return (
       <>
-        <Link className="back_to_roster_link" to="/roster">
-          ⬅︎ Back to Roster
-        </Link>
-        <section className="CharacterSheet">
-          {error ? (
-            <p>There was an error, try again</p>
-          ) : (
-            this.renderCharacterSheet()
-          )}
-        </section>
+        <SecondaryHeader />
+
+        {error ? (
+          <p>There was an error, try again</p>
+        ) : (
+          this.renderCharacterSheet()
+        )}
       </>
     );
   }
 }
+
+SingleCharacterPage.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object
+};

@@ -6,16 +6,39 @@ header a {
   color: #e9631a;
 }
 
+nav {
+  margin-top: 30px;
+}
 nav ul {
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 nav ul li {
   list-style: none;
-  margin-right: 10px;
+  margin-right: 40px;
+  font-size: 22px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.control_menu {
+  justify-content: center;
 }
 
 h1,
 h2 {
   text-align: center;
+}
+.welcome_message {
+  text-align: center;
+}
+.username_display {
+  color: orange;
 }

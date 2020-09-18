@@ -1,0 +1,27 @@
+.registration_form {
+  font-size: 20px;
+  margin-left: 18px;
+}
+
+.registration_form label {
+  margin-right: 30px;
+}
+
+.registration_form div {
+  margin-top: 15px;
+}
+
+.registration-form button {
+  margin-top: 10px;
+}
+
+.registration_form_submit_btn {
+  margin-top: 20px;
+  margin-left: 90px;
+}
+
+.registration_form_submit_btn button {
+  font-size: 20px;
+  padding: 0 40px;
+  margin-top: 20px;
+}

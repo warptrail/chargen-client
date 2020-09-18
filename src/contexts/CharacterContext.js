@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export const nullCharacter = {
   author: {},
@@ -31,6 +32,10 @@ const CharacterContext = React.createContext({
 export default CharacterContext;
 
 export class CharacterProvider extends Component {
+  static defaultProps = {
+    children: {}
+  };
+
   state = {
     character: nullCharacter,
     items: nullItems,
@@ -60,7 +65,8 @@ export class CharacterProvider extends Component {
   };
 
   addItem = (item) => {
-    this.setItems([...this.state.items, item]);
+    const { items } = this.state;
+    this.setItems([...items, item]);
   };
 
   // deleteItem = (item) => {
@@ -70,10 +76,11 @@ export class CharacterProvider extends Component {
   // };
 
   render() {
+    const { character, items, error } = this.state;
     const value = {
-      character: this.state.character,
-      items: this.state.items,
-      error: this.state.error,
+      character,
+      items,
+      error,
       setError: this.setError,
       clearError: this.clearError,
       setCharacter: this.setCharacter,
@@ -82,10 +89,16 @@ export class CharacterProvider extends Component {
       addItem: this.addItem,
       deleteItem: this.deleteItem
     };
+
+    const { children } = this.props;
     return (
       <CharacterContext.Provider value={value}>
-        {this.props.children}
+        {children}
       </CharacterContext.Provider>
     );
   }
 }
+
+CharacterProvider.propTypes = {
+  children: PropTypes.object
+};

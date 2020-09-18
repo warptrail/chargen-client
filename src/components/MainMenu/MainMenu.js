@@ -7,18 +7,15 @@ export default class MainMenu extends Component {
   render() {
     return (
       <div>
-        <p className="intro">
-          Store your Dungeons & Dragons characters in this list. Create new
-          characters, edit them, randomize their stats, and add special items to
-          their inventories.
-        </p>
-
         <ul className="MainMenu">
           <Link to="/create">
-            <li className="MainMenu__item">Create New</li>
+            <li className="MainMenu__item">Create New Character</li>
           </Link>
           <Link to="/roster">
-            <li className="MainMenu__item">Roster</li>
+            <li className="MainMenu__item">My Roster</li>
+          </Link>
+          <Link to="/about">
+            <li className="MainMenu__item">About Page</li>
           </Link>
         </ul>
       </div>

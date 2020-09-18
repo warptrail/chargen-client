@@ -17,6 +17,10 @@ input[type='text'] {
 .stats_form {
   flex-direction: row;
 }
+.form_legend {
+  font-size: 25px;
+  text-align: center;
+}
 .stats_form input {
   width: 70px;
 }

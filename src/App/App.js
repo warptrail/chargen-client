@@ -13,6 +13,7 @@ import RosterPage from '../routes/RosterPage/RosterPage';
 import SingleCharacterPage from '../routes/SingleCharacterPage/SingleCharacterPage';
 import UpdateCharacterPage from '../routes/UpdateCharacterPage/UpdateCharacterPage';
 import CreatePage from '../routes/CreatePage/CreatePage';
+import AboutPage from '../routes/AboutPage/AboutPage';
 import NotFoundPage from '../routes/NotFoundPage/NotFoundPage';
 import PublicOnlyRoute from '../utils/PublicOnlyRoute';
 import PrivateRoute from '../utils/PrivateRoute';
@@ -21,9 +22,9 @@ import RosterContext from '../contexts/RosterContext';
 import './App.css';
 
 export default class App extends Component {
-  state = { hasError: false };
-
   static contextType = RosterContext;
+
+  state = { hasError: false };
 
   static getDerivedStateFromError(error) {
     console.error(error);
@@ -31,24 +32,27 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // Check if token exists
     if (!TokenService.hasAuthToken()) {
       return;
     }
+    // Check if token is expired and delete if expired.
     const token = TokenService.readJwtToken();
-    console.log(token);
+    const { setAuthToken } = this.context;
     if (new Date(token.exp * 1000) < new Date()) {
       TokenService.clearAuthToken();
-      this.context.setAuthToken(null);
+      setAuthToken(null);
     }
   }
 
   render() {
+    const { hasError, hideSecondaryMenu } = this.state;
     return (
       <div className="App">
-        <Header />
+        <Header atHomePage={hideSecondaryMenu} />
 
         <main className="App__main">
-          {this.state.hasError && <p>An Error has dealt you ten damage!</p>}
+          {hasError && <p>An Error has dealt you ten damage!</p>}
           <Switch>
             <Route exact path="/" component={HomePage} />
             <PublicOnlyRoute exact path="/login" component={LoginPage} />
@@ -57,7 +61,7 @@ export default class App extends Component {
               path="/register"
               component={RegistrationPage}
             />
-            <Route exact path="/roster" component={RosterPage} />
+            <PrivateRoute exact path="/roster" component={RosterPage} />
             <Route
               exact
               path="/roster/:characterId"
@@ -68,6 +72,7 @@ export default class App extends Component {
               path="/roster/:characterId/update"
               component={UpdateCharacterPage}
             />
+            <Route exact path="/about" component={AboutPage} />
 
             <PrivateRoute exact path="/create" component={CreatePage} />
             <Route component={NotFoundPage} />

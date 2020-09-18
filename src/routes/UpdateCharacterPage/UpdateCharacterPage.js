@@ -1,6 +1,5 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import CharacterContext from '../../contexts/CharacterContext';
 import CharacterForm from '../../components/CharacterForm/CharacterForm';
@@ -8,16 +7,23 @@ import CharacterForm from '../../components/CharacterForm/CharacterForm';
 export default class UpdateCharacterPage extends Component {
   static contextType = CharacterContext;
 
+  static defaultProps = {
+    history: {},
+    match: {}
+  };
+
   returnToCharacterPage = () => {
-    const { characterId } = this.props.match.params;
-    console.log('Its cool guy', characterId);
+    const { match } = this.props;
+    const { characterId } = match.params;
+
     const { history } = this.props;
     history.push(`/roster/${characterId}`);
   };
 
   render() {
-    const { characterId } = this.props.match.params;
-    console.log('route props???', this.props);
+    const { match } = this.props;
+    const { characterId } = match.params;
+
     return (
       <div>
         Update yer guy here!
@@ -29,3 +35,8 @@ export default class UpdateCharacterPage extends Component {
     );
   }
 }
+
+UpdateCharacterPage.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object
+};

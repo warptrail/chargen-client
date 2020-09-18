@@ -4,16 +4,19 @@ import TokenService from './token-service';
 const CharApiService = {
   getRoster() {
     return fetch(`${config.API_ENDPOINT}/characters`, {
-      headers: {}
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
     }).then((res) => {
-      console.log(res.status, res.statusText);
       return !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json();
     });
   },
 
   getCharacter(characterId) {
     return fetch(`${config.API_ENDPOINT}/characters/${characterId}`, {
-      headers: {}
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
@@ -39,8 +42,8 @@ const CharApiService = {
         constitution: data.constitution,
         intelligence: data.intelligence,
         wisdom: data.wisdom,
-        charisma: data.charisma,
-        user_id: 1
+        charisma: data.charisma
+        // user_id: 1
       })
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -84,7 +87,9 @@ const CharApiService = {
 
   getCharacterItems(characterId) {
     return fetch(`${config.API_ENDPOINT}/characters/${characterId}/items`, {
-      headers: {}
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );

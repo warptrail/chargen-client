@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
 export default class LoginPage extends Component {
@@ -24,3 +25,8 @@ export default class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object
+};

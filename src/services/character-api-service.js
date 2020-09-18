@@ -70,8 +70,8 @@ const CharApiService = {
         constitution: data.constitution,
         intelligence: data.intelligence,
         wisdom: data.wisdom,
-        charisma: data.charisma,
-        user_id: 1
+        charisma: data.charisma
+        // user_id: 1
       })
     });
   },

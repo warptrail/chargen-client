@@ -25,7 +25,7 @@ export default class CharacterForm extends Component {
       race: 'human',
       alignment: 'lawful good',
       background: '',
-      charLevel: '',
+      charLevel: 1,
       strength: '',
       dexterity: '',
       constitution: '',
@@ -232,6 +232,7 @@ export default class CharacterForm extends Component {
           name="charLevel"
           id="charLevel"
           type="number"
+          min="1"
           value={character.charLevel}
           onChange={this.handleChange}
         />

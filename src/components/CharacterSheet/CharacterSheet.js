@@ -13,7 +13,6 @@ class CharacterSheet extends Component {
       race: '',
       background: '',
       alignment: '',
-      number_of_items: '',
       strength: 0,
       dexterity: 0,
       constitution: 0,
@@ -50,12 +49,6 @@ class CharacterSheet extends Component {
           <span className="character_sheet_key">Alignment:</span>{' '}
           {character.alignment}
         </p>
-        <p>
-          {' '}
-          <span className="character_sheet_key">Number of Items:</span>{' '}
-          {character.number_of_items}
-        </p>
-
         <h3>Stats</h3>
         <section className="stats">
           <div className="stat_box">

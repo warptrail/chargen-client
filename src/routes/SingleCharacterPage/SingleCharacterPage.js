@@ -26,7 +26,7 @@ export default class SingleCharacterPage extends Component {
     history: {}
   };
 
-  // !Note this component references two contexts
+  // Note this component references two contexts
 
   componentDidMount() {
     const { clearError, setError, setCharacter, setItems } = this.context;

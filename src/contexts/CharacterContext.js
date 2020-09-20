@@ -69,12 +69,6 @@ export class CharacterProvider extends Component {
     this.setItems([...items, item]);
   };
 
-  // deleteItem = (item) => {
-  //   const items = this.state.items.filter((itm) => itm.id !== item.id);
-  //   this.setItems([items]);
-  //   console.log(item.id, 'deletingItem Check');
-  // };
-
   render() {
     const { character, items, error } = this.state;
     const value = {

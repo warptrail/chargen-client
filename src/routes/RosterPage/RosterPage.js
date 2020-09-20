@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import RosterContext from '../../contexts/RosterContext';
@@ -10,10 +9,9 @@ class RosterPage extends Component {
   static contextType = RosterContext;
 
   componentDidMount() {
-    this.context.clearError();
-    CharApiService.getRoster()
-      .then(this.context.setRoster)
-      .catch(this.context.setError);
+    const { clearError, setRoster, setError } = this.context;
+    clearError();
+    CharApiService.getRoster().then(setRoster).catch(setError);
   }
 
   renderCharacters() {

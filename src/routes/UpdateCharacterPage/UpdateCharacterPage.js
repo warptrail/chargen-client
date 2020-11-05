@@ -26,7 +26,6 @@ export default class UpdateCharacterPage extends Component {
 
     return (
       <div>
-        Update yer guy here!
         <CharacterForm
           characterId={characterId}
           returnToCharacterPage={this.returnToCharacterPage}

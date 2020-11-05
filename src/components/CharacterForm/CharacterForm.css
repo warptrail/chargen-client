@@ -4,14 +4,24 @@
 }
 .character_form label {
   margin-bottom: 8px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
 }
-fieldset {
+.character_form fieldset {
   display: flex;
+  flex-direction: column;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='number'],
+select {
   flex-grow: 1;
   width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 5px;
+  font-size: 20px;
 }
 
 .stats_form {
@@ -30,9 +40,15 @@ input[type='text'] {
   cursor: pointer;
   background-color: #4e0b65;
   color: #8eef01;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bolder;
-  margin-bottom: 10px;
+  width: 300px;
+  margin: 10px auto;
+}
+
+.randomize_button:active {
+  background-color: #8eef01;
+  color: #4e0b65;
 }
 #submit-character-form {
   margin-top: 10px;
